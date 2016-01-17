@@ -1,14 +1,13 @@
-package mariorugeles.me.moviediscover;
+package me.mariorugeles.app;
 
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +21,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import mariorugeles.me.moviediscover.model.Movie;
+import mariorugeles.me.moviediscover.R;
+import me.mariorugeles.app.model.Movie;
+import me.mariorugeles.app.model.MovieAdapter;
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -30,7 +32,7 @@ import mariorugeles.me.moviediscover.model.Movie;
 public class MovieListFragment extends Fragment {
     private final String LOG_TAG = MovieListFragment.class.getSimpleName();
 
-    ArrayAdapter<Movie> movieListAdapter;
+    MovieAdapter movieListAdapter;
 
     public MovieListFragment() {
     }
@@ -45,13 +47,10 @@ public class MovieListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.v(LOG_TAG, "MovieListFragment Ok");
-        movieListAdapter = new ArrayAdapter<Movie>(
-                getActivity(),
-                R.layout.list_item_forecast,
-                R.id.list_item_forecast_textview,
-                new ArrayList<String>()
-        );
-        return inflater.inflate(R.layout.movielistfragment, container, false);
+        final View rootView = inflater.inflate(R.layout.movielistfragment, container, false);
+        movieListAdapter = new MovieAdapter(getActivity(), new ArrayList<Movie>());
+        return rootView;
+
     }
 
     private void updateMovieList() {

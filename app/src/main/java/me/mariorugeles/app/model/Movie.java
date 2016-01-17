@@ -1,4 +1,4 @@
-package mariorugeles.me.moviediscover.model;
+package me.mariorugeles.app.model;
 
 /**
  * Created by mario on 1/16/16.

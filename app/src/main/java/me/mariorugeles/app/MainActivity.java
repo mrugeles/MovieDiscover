@@ -1,9 +1,11 @@
-package mariorugeles.me.moviediscover;
+package me.mariorugeles.app;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import mariorugeles.me.moviediscover.R;
 
 public class MainActivity extends ActionBarActivity {
 
