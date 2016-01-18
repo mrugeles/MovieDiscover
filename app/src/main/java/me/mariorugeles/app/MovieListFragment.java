@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +33,8 @@ import me.mariorugeles.app.model.MovieAdapter;
  */
 public class MovieListFragment extends Fragment {
     private final String LOG_TAG = MovieListFragment.class.getSimpleName();
-
+    final String ORDER_POPULAR = "popularity.desc";
+    final String ORDER_RATING = "vote_average.desc";
     MovieAdapter movieListAdapter;
 
     public MovieListFragment() {
@@ -40,42 +43,67 @@ public class MovieListFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-        updateMovieList();
+        updateMovieList(ORDER_POPULAR);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.v(LOG_TAG, "MovieListFragment Ok");
         final View rootView = inflater.inflate(R.layout.movielistfragment, container, false);
         movieListAdapter = new MovieAdapter(getActivity(), new ArrayList<Movie>());
+
+        GridView movieGridView = (GridView)rootView.findViewById(R.id.gridview_movies);
+        movieGridView.setAdapter(movieListAdapter);
         return rootView;
 
     }
 
-    private void updateMovieList() {
-        new FetchMoviesTask().execute();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        int id = menuItem.getItemId();
+
+        if(id == R.id.action_order_popular){
+            updateMovieList(ORDER_POPULAR);
+            return true;
+        }
+        if(id == R.id.action_order_rating){
+            updateMovieList(ORDER_RATING);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(menuItem);
     }
 
-    public class FetchMoviesTask extends AsyncTask<Void, Void, Movie[]> {
+    private void updateMovieList(String order) {
+        new FetchMoviesTask().execute(order);
+    }
+
+    public class FetchMoviesTask extends AsyncTask<String, Void, Movie[]> {
 
         private final String LOG_TAG = FetchMoviesTask.class.getSimpleName();
 
         @Override
-        protected Movie[] doInBackground(Void... params) {
-            Log.v(LOG_TAG, "FetchMoviesTask Ok");
+        protected Movie[] doInBackground(String... params) {
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
 
+            String orderby = params[0];
             String jsonResponseStr = null;
             String appid = "555a0bd61e31208b9eb14cf8c1a1392e";
             try {
                 final String MOVIEDB_BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
+                final String SORTBY_PARAM = "sort_by";
                 final String APPIKEY_PARAM = "api_key";
 
                 Uri buildUri = Uri.parse(MOVIEDB_BASE_URL).buildUpon()
-                        .appendQueryParameter(APPIKEY_PARAM, appid).build();
-
+                        .appendQueryParameter(APPIKEY_PARAM, appid)
+                        .appendQueryParameter(SORTBY_PARAM, orderby).build();
                 URL url = new URL(buildUri.toString());
 
                 // Create the request to OpenWeatherMap, and open the connection
@@ -105,7 +133,6 @@ public class MovieListFragment extends Fragment {
                     jsonResponseStr = null;
                 }
                 jsonResponseStr = buffer.toString();
-                Log.v(LOG_TAG, jsonResponseStr);
             }catch (IOException ex){
                 Log.e(LOG_TAG, "FetchMovies Err", ex);
             }
@@ -132,11 +159,9 @@ public class MovieListFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Movie[] result){
-            Log.v(LOG_TAG, "onPostExecute");
             if(result != null){
                 movieListAdapter.clear();
                 for (Movie movie:result ) {
-                    Log.v(LOG_TAG, movie.getTitle());
                     movieListAdapter.add(movie);
                 }
             }

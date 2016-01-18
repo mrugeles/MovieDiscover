@@ -1,13 +1,13 @@
 package me.mariorugeles.app.model;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -18,6 +18,7 @@ import mariorugeles.me.moviediscover.R;
  */
 public class MovieAdapter extends ArrayAdapter<Movie> {
     private static final String LOG_TAG = MovieAdapter.class.getSimpleName();
+    private static final String IMAGE_BASE_PATH = "http://image.tmdb.org/t/p/w500/";
 
     public MovieAdapter(Activity context, List<Movie> Movies) {
         super(context, 0, Movies);
@@ -31,13 +32,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         }
 
         ImageView posterImageView = (ImageView) convertView.findViewById(R.id.list_item_posterimage);
-        posterImageView.setImageURI(Uri.parse(Movie.getPoster())); //.setImageResource(Movie.getPoster());
-
-        TextView titleView = (TextView) convertView.findViewById(R.id.list_item_title);
-        titleView.setText(Movie.getTitle());
-
-        TextView ratingView = (TextView) convertView.findViewById(R.id.list_item_rating);
-        ratingView.setText(String.format("%d %", Movie.getRating()));
+        Picasso.with(getContext()).load(String.format("%s%s", IMAGE_BASE_PATH, Movie.getPoster())).into(posterImageView);
         return convertView;
     }
 

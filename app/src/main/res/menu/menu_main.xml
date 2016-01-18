@@ -3,6 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="me.mariorugeles.app.MainActivity">
     <item
+        android:id="@+id/action_order_popular"
+        android:title="@string/menu_order_popular"
+        android:orderInCategory="0"
+        app:showAsAction="never" />
+    <item
+    android:id="@+id/action_order_rating"
+    android:title="@string/menu_order_rating"
+    android:orderInCategory="0"
+    app:showAsAction="never" />
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
