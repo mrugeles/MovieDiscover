@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mariorugeles.me.moviediscover">
+    package="me.mariorugeles.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="me.mariorugeles.app.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,8 +19,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="me.mariorugeles.app.MovieDetail"
-            android:label="@string/title_activity_movie_detail"></activity>
+            android:name=".MovieDetailActivity"
+            android:label="@string/title_activity_movie_detail"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.mariorugeles.app.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

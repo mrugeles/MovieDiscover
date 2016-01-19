@@ -1,5 +1,6 @@
 package me.mariorugeles.app;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import org.json.JSONArray;
@@ -23,7 +25,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import mariorugeles.me.moviediscover.R;
 import me.mariorugeles.app.model.Movie;
 import me.mariorugeles.app.model.MovieAdapter;
 
@@ -60,6 +61,15 @@ public class MovieListFragment extends Fragment {
 
         GridView movieGridView = (GridView)rootView.findViewById(R.id.gridview_movies);
         movieGridView.setAdapter(movieListAdapter);
+        movieGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Movie movie = movieListAdapter.getItem(position);
+                Intent movieDetailIntent = new Intent(getActivity(), MovieDetailActivity.class)
+                        .putExtra("movie", movie);
+                startActivity(movieDetailIntent);
+            }
+        });
         return rootView;
 
     }
@@ -133,6 +143,7 @@ public class MovieListFragment extends Fragment {
                     jsonResponseStr = null;
                 }
                 jsonResponseStr = buffer.toString();
+                Log.v(LOG_TAG, jsonResponseStr);
             }catch (IOException ex){
                 Log.e(LOG_TAG, "FetchMovies Err", ex);
             }

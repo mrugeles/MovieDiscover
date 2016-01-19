@@ -11,14 +11,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import mariorugeles.me.moviediscover.R;
+import me.mariorugeles.app.R;
+
 
 /**
  * Created by mario on 1/17/16.
  */
 public class MovieAdapter extends ArrayAdapter<Movie> {
     private static final String LOG_TAG = MovieAdapter.class.getSimpleName();
-    private static final String IMAGE_BASE_PATH = "http://image.tmdb.org/t/p/w500/";
+    private static final String IMAGE_BASE_PATH = "http://image.tmdb.org/t/p/w185/";
 
     public MovieAdapter(Activity context, List<Movie> Movies) {
         super(context, 0, Movies);
@@ -32,7 +33,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         }
 
         ImageView posterImageView = (ImageView) convertView.findViewById(R.id.list_item_posterimage);
-        Picasso.with(getContext()).load(String.format("%s%s", IMAGE_BASE_PATH, Movie.getPoster())).into(posterImageView);
+        Picasso.with(getContext()).load(Movie.getPoster()).into(posterImageView);
         return convertView;
     }
 

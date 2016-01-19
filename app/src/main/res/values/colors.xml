@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_detail_title_background">#009688</color>
+    <color name="color_detail_title_text">#FFFFFF</color>
+    <color name="color_detail_title_shadow">#9c9c9c</color>
+    <color name="color_detail_button_markfavorite_background">#E0F2F1</color>
+</resources>

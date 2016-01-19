@@ -4,4 +4,6 @@
     <string name="menu_order_popular">Order by most popular</string>
     <string name="menu_order_rating">Order by highest rated</string>
     <string name="title_activity_movie_detail">MovieDetail</string>
+    <string name="detail_button_markfavorite">MARK AS FAVORITE</string>
+    <string name="detail_posterimage_description">Poster Image</string>
 </resources>

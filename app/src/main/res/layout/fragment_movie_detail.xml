@@ -1,12 +1,72 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_moviedetail"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="me.mariorugeles.app.MovieDetailFragment">
+    tools:context="me.mariorugeles.app.MovieDetailFragment"
+    android:textAlignment="center">
+    <TextView
+        android:text="Title"
+        android:id="@+id/detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/color_detail_title_background"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_detail_title_text"
+        android:textSize="@dimen/abc_text_size_headline_material"
+        android:padding="10dp"
+        android:shadowColor="@color/color_detail_title_shadow"
+        />
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:adjustViewBounds="true">
+        <ImageView
+            android:id="@+id/detail_posterimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/detail_posterimage_description" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/detail_releasedate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/background_material_dark"
+                android:textSize="@dimen/abc_text_size_large_material"/>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/detail_voteaverage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/background_material_dark"
+                android:textSize="@dimen/abc_text_size_large_material"
+                android:textStyle="italic"/>
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/detail_button_markfavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_button_markfavorite"
+                android:background="@color/color_detail_button_markfavorite_background"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
 
+    <TextView
+        android:layout_margin="10dp"
+        android:id="@+id/detail_plot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-</RelativeLayout>
+</LinearLayout>
