@@ -105,7 +105,7 @@ public class MovieListFragment extends Fragment {
 
             String orderby = params[0];
             String jsonResponseStr = null;
-            String appid = "555a0bd61e31208b9eb14cf8c1a1392e";
+            String appid = "your app id key here";
             try {
                 final String MOVIEDB_BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
                 final String SORTBY_PARAM = "sort_by";
