@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context="me.mariorugeles.app.MovieDetailFragment"
     android:textAlignment="center">
+
     <TextView
         android:text="Title"
         android:id="@+id/detail_title"
@@ -19,6 +20,13 @@
         android:padding="10dp"
         android:shadowColor="@color/color_detail_title_shadow"
         />
+    <ScrollView android:id="@+id/detail_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <LinearLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"
@@ -68,5 +76,6 @@
         android:id="@+id/detail_plot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
